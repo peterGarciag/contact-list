@@ -1,11 +1,17 @@
 {
   "name": "contact-list",
   "version": "0.0.1",
-  "description": "An Ionic project",
+  "description": "CRUD simple de contactos  consumiendo el API de alegra.",
   "devDependencies": {
     "gulp": "^3.5.6",
     "gulp-clean-css": "^3.7.0",
+    "gulp-concat-replace": "^1.0.5",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-jade": "^1.1.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^4.3.11",
+    "imagemin-pngcrush": "^5.1.0"
   }
 }

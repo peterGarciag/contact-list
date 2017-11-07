@@ -1,5 +1,23 @@
 {
   "name": "contact-list",
   "app_id": "",
-  "type": "ionic1"
+  "type": "ionic1",
+  "integrations": {
+    "gulp": {
+    },
+    "cordova": {}
+  },
+
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ],
+  "proxies": [
+    {
+    "path": "https://app.alegra.com/api/v1/",
+    "proxyUrl": "https://www.abc.com/api"
+    }
+  ]
 }

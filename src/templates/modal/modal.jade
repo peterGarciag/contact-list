@@ -1,0 +1,9 @@
+ion-modal-view
+    ion-header-bar(class="bar-positive")
+         h1(class="title")
+            | {{main.titleModal}}
+         button(class="button button-assertive" ng-click="main.cerrarModal()")
+            | Cancelar
+    ion-content
+       {{main | json}}
+       form

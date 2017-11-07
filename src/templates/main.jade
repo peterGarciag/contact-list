@@ -1,0 +1,12 @@
+ion-view(view-title='Lista de contactos')
+    ion-header-bar(class="bar-positive")
+     h1(class="title")
+        | Lista de contactos
+      button(class="button icon ion-plus-circled" ng-click="main.mostarModalAdd()")
+    ion-footer-bar.bar-positive.item-input-inset(align-title='center')
+        label.item-input-wrapper
+         i.icon.ion-ios-search.placeholder-icon
+         input(type='search', placeholder='Filtrar', ng-model='search') 
+    ion-content
+        contact-list(on-edit="main.edita(item)"  ordenarpor="id" filtro="{{search}}" see-details="main.detalles(item)")
+
