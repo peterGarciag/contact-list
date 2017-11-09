@@ -20,7 +20,11 @@
      { id: 6, valor: ' CDI'},
     ];
     vm.base = {};
-
+    /**
+     * [modal para edicion creaciony detalle del contacto]
+     * @param  {[type]} modal) {                   vm.modal [description]
+     * @return {[type]}        [description]
+     */
     $ionicModal.fromTemplateUrl('templates/modal/modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -40,12 +44,20 @@
       vm.modal.show();
     };
 
+    /**
+     * [activa el modo edicion dentro de la modal]
+     */
     vm.Edit = function(){
         vm.Editar = true;
         vm.Detalles = false;
          vm.titleModal = "Editar contacto";
     }
 
+    /**
+     * [carga los datos del contacto seleccionado]
+     * @param  {[type]} item [description]
+     * @return {[type]}      [description]
+     */
     vm.cargar = function(item){
       vm.base = item;
       if (item.type.indexOf('client') >= 0) {
@@ -54,6 +66,7 @@
       if (item.type.indexOf('provider') >= 0) {
         vm.base.typep = true;
       }
+
       // validar pais, no me fue posible enviar los datos nesesarios para la creacion de un contacto en otro pais, el api no almacena los datos enviados.
       // if (typeof item.identification != 'object' && vm.pais == '7' ) {
       //   vm.base.identification = {};
@@ -74,6 +87,11 @@
        vm.cargar(item);
       vm.modal.show();
     };
+
+    /**
+     * [ir a la vista de opciones]
+     * @return {[type]} [description]
+     */
     vm.opciones  = function(){
         $state.go('options');
     }
@@ -91,7 +109,10 @@
     };
 
 
-
+    /**
+     * [cierra la modal y reinicia los objetos]
+     * @return {[type]} [description]
+     */
     vm.cerrarModal = function(){
        vm.modal.hide();
        vm.base = {};
@@ -100,7 +121,10 @@
 
 
 
-
+    /**
+     * [modifica el tipo del cliente en edicion y creacion]
+     * @return {[type]} [description]
+     */
     vm.tipo = function(){
          vm.base.type =[];
         if(vm.base.typec){
@@ -112,6 +136,11 @@
         
     };
 
+    /**
+     * [crea un nuevo contacto]
+     * @param  {[type]} form [description]
+     * @return {[type]}      [description]
+     */
     vm.nuevoContacto = function(form){
         
      ContactService.addContact(vm.base).then(function(res){
@@ -123,6 +152,11 @@
     };
 
 
+    /**
+     * [edita la informacion de el contacto existente]
+     * @param  {[type]} form [description]
+     * @return {[type]}      [description]
+     */
     vm.editarContacto = function(form){
         
      ContactService.ActualizarContacto(vm.base.id,vm.base).then(function(res){

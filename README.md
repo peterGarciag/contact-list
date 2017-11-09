@@ -20,6 +20,31 @@ instalar  dependencias  npm y bower
 ```bash
 npm i &&  bower install
 ```
+
+crear el archivo app.constant.js que contiene la URL y llave  del api en  src/js
+el archvio debe tener la siguiente estructura
+
+
+```javascript
+(function() {
+    'use strict';  
+angular.module('main.constants', [])
+.constant('API', 
+    {
+        API_URL: 'url del api',
+        TOKEN: 'token de acceso',
+        USER: 'nombre de usuario'
+        
+    }
+);
+})();
+
+```
+
+
+
+
+
 compilar 
 
 ```bash

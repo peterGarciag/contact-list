@@ -28,11 +28,19 @@
     _vm.ExistenMasContactos = true;
     _vm.Total;
    
+   /**
+    * escucha los el evento reloadlist para actualizar la lista de contactos uego de eliminar o crear un contacto
+    */
     $scope.$on('reloadlist', function(evt, data){
        if (data === true) {
          _vm.doRefresh();
        }
     });
+
+    /**
+     * [obtiene los contactos en grupos para el infinite scroll]
+     * @return {[type]} [description]
+     */
     _vm.getMoreContacts = function() {
       
       var initialContact = 0;
@@ -65,10 +73,17 @@
 
     };  
 
+    /**
+     * [cre un enlace telefonico para llamar al contacto]
+     * @param  {[type]} item [description]
+     * @return {[type]}      [description]
+     */
     _vm.llamar = function(item){
       var URL = "tel:"+item.mobile;
       window.open(URL);
-    };  
+    }; 
+
+    /** [filtro de contactos] */
     _vm.buscar = function(criteria) {
 
       return function(item) {
@@ -99,6 +114,11 @@
       };
     };
 
+    /**
+     * [funcion encargada de refrescar la lista de contactos , ion-refresher]
+     * @param  {[type]} ev [description]
+     * @return {[type]}    [description]
+     */
     _vm.doRefresh = function(ev) {
       var params = {
         start: 0,
@@ -116,6 +136,11 @@
       });
     };
 
+    /**
+     * [elimina el contato]
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
     _vm.delete = function(id) {
 
       let _id = id;

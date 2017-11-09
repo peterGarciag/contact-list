@@ -5,15 +5,19 @@
     .factory("ContactService", _contactService);
 
   function _contactService($http, API) {
+    /** headers */
     $http.defaults.headers.common["Content-Type"] = "application/json";
     $http.defaults.headers.common.Authorization = 'Basic ' + window.btoa(API.USER + ":" + API.TOKEN);
     $http.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
     $http.defaults.headers.common['Access-Control-Allow-Methods'] = "GET, POST, PUT, DELETE, OPTIONS";
     $http.defaults.headers.common['Access-Control-Allow-Headers'] = "Authorization";
-
+    /**---*/
     var obj = {};
 
-
+    /**
+     * [añade un contacto]
+     * @param {[contact]} param [description]
+     */
     obj.addContact = function( param) {
 
       return $http.post(API.API_URL + "contacts", (param ? param : new Object())).then(function(results, status, headers) {
@@ -41,6 +45,11 @@
 
     };
 
+    /**
+     * [actualiza el contacto]
+     * @param {[int]} idContacto [identificador del contacto]
+     * @param {[type]} param      [description]
+     */
     obj.ActualizarContacto = function(idContacto,param) {
 
       return $http.put(API.API_URL + "contacts/" + idContacto,param).then(function(results, status, headers) {
@@ -53,6 +62,10 @@
 
     };
 
+    /**
+     * [elimina el contacto]
+     * @param {[int]} idContacto [identificador del contacto]
+     */
     obj.BorrarContacto = function(idContacto) {
       return $http.delete(API.API_URL + "contacts/" + idContacto).then(function(results, status, headers) {
         var ret = {};
