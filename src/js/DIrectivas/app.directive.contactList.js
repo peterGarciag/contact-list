@@ -67,7 +67,6 @@
 
     _vm.llamar = function(item){
       var URL = "tel:"+item.mobile;
-      console.log(URL);
       window.open(URL);
     };  
     _vm.buscar = function(criteria) {
@@ -78,12 +77,23 @@
         if (criteria == "") {
           b = true;
         } else {
-          b = (item.name.indexOf(criteria) >= 0 ||
-            item.email.indexOf(criteria) >= 0 ||
-            item.phonePrimary.indexOf(criteria) >= 0 ||
-            item.phoneSecondary.indexOf(criteria) >= 0 ||
-            item.fax.indexOf(criteria) >= 0);
-          
+
+          b = (item.name.indexOf(criteria) >= 0);
+          if (item.email != null) {
+            b = b ||item.email.indexOf(criteria) >= 0 ;
+          }
+
+          if (item.phoneSecondary != null) {
+            b =  b || item.phoneSecondary.indexOf(criteria) >= 0;
+          };
+
+          if (item.phonePrimary != null) {
+             b =  b || item.phonePrimary.indexOf(criteria) >= 0 
+          };
+          if (item.fax != null) {
+             b =  b ||item.fax.indexOf(criteria) >= 0
+          }
+           
         }
         return b;
       };
@@ -97,7 +107,6 @@
         order_field: 'id',
       };
       ContactService.ObtenerContactos(params).then(function(res) {
-        console.log(res);
         _vm.Total = res.total;
         _vm.Contactos = res.contactos;
         _vm.ExistenMasContactos = true;

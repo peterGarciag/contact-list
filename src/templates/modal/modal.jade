@@ -14,17 +14,16 @@ ion-modal-view
                   ion-item.item-input.item-floating-label
                     span.input-label(ng-class="{ 'valid' : contacto.nombre.$valid, 'invalid' :!contacto.nombre.$valid}") Nombre
                     input( ng-disabled="main.Detalles" type='text', ng-model="main.base.name"  placeholder='Nombre', name="nombre" ,ng-required="true" , ng-maxlength="90")
-                  ion-item.item-input.item-floating-label
+                  ion-item.item-input.item-floating-label(ng-if="main.pais != '7'")
                     span.input-label(ng-class="{ 'valid' : contacto.identificacion.$valid , 'invalid' :  !contacto.identificacion.$valid }") Identificación
                     input( ng-disabled="main.Detalles" type='text',  ng-model="main.base.identification" placeholder='Identificación' , name="identificacion"  , ng-required="true" , ng-maxlength="45")
-
                   ion-item.item-input.item-floating-label
                     span.input-label(ng-class="{ 'valid' : contacto.email.$valid , 'invalid' :  !contacto.email.$valid }") Email
                     input( ng-disabled="main.Detalles" type='email', name="email",ng-model="main.base.email " ,placeholder='Email', ng-pattern="main.emailRegex",ng-maxlength="100")
                 
                   ion-item.item-input.item-floating-label
                     span.input-label(ng-class="{ 'valid' : contacto.observaciones.$valid , 'invalid' :  !contacto.observaciones.$valid }") Observaciones
-                    textarea( msd-elastic, ng-model="main.base.observations" , name="observaciones",ng-maxlength="500" ,placeholder='Observaciones')
+                    textarea( msd-elastic, ng-model="main.base.observations" , name="observaciones",ng-maxlength="500" ,placeholder='Observaciones',ng-disabled="main.Detalles" )
                   ion-item.item-divider
                     | Dirección
                   ion-item.item-input.item-floating-label
@@ -52,9 +51,9 @@ ion-modal-view
                   ion-item.item-divider
                     | Tipo
                   ion-item
-                    ion-checkbox.checkbox-calm(ng-change="main.tipo()" ng-model="main.base.typec")
+                    ion-checkbox.checkbox-calm(ng-disabled="main.Detalles" ng-change="main.tipo()" ng-model="main.base.typec")
                         | Cliente
-                    ion-checkbox.checkbox-calm(ng-change="main.tipo()" ng-model="main.base.typep")
+                    ion-checkbox.checkbox-calm(ng-disabled="main.Detalles" ng-change="main.tipo()" ng-model="main.base.typep")
                         | Proveedor
                   
             button(type="submit" ng-click="main.nuevoContacto(contacto)" class="button button-full button-positive ion-plus-circled"   ng-if="!main.Editar && !main.Detalles" ng-disabled="contacto.$invalid")

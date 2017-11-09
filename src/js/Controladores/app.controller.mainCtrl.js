@@ -11,6 +11,14 @@
     vm.emailRegex  = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
     vm.telefonosRegex = "[0-9*+#()]";
     vm.pais = localStorage.getItem("pais");
+    vm.indetificationTypes = [
+     { id:1 , valor: 'SIN RUC'},
+     { id: 2, valor: ' RUC'},
+     { id: 3, valor: ' DNI'},
+     { id: 4, valor: ' PP'},
+     { id: 5, valor: ' CE'},
+     { id: 6, valor: ' CDI'},
+    ];
     vm.base = {};
 
     $ionicModal.fromTemplateUrl('templates/modal/modal.html', {
@@ -28,22 +36,31 @@
       vm.titleModal = "Editar contacto";
       vm.Editar = true;
        vm.Detalles = false;
-      vm.base = item;
-       if (item.type.indexOf('client') >= 0) {
-        vm.base.typec = true;
-      }
-      if (item.type.indexOf('provider') >= 0) {
-        vm.base.typep = true;
-      }
+      vm.cargar(item);
       vm.modal.show();
     };
 
     vm.Edit = function(){
         vm.Editar = true;
         vm.Detalles = false;
-        console.log(vm.Editar);
+         vm.titleModal = "Editar contacto";
     }
 
+    vm.cargar = function(item){
+      vm.base = item;
+      if (item.type.indexOf('client') >= 0) {
+        vm.base.typec = true;
+      }
+      if (item.type.indexOf('provider') >= 0) {
+        vm.base.typep = true;
+      }
+      // validar pais, no me fue posible enviar los datos nesesarios para la creacion de un contacto en otro pais, el api no almacena los datos enviados.
+      // if (typeof item.identification != 'object' && vm.pais == '7' ) {
+      //   vm.base.identification = {};
+      // }
+      
+
+    };
     /**
      * muestra la informacion del contacto
      * @param  {[type]} item [description]
@@ -54,13 +71,7 @@
       vm.titleModal = "Detalles contacto";
       vm.Editar = false;
        vm.Detalles = true;
-      vm.base = item;
-      if (item.type.indexOf('client') >= 0) {
-        vm.base.typec = true;
-      }
-      if (item.type.indexOf('provider') >= 0) {
-        vm.base.typep = true;
-      }
+       vm.cargar(item);
       vm.modal.show();
     };
     vm.opciones  = function(){
@@ -98,7 +109,7 @@
         if(vm.base.typep){
             vm.base.type.push('provider');
         }
-        console.log(vm.base.type);
+        
     };
 
     vm.nuevoContacto = function(form){
@@ -116,7 +127,9 @@
         
      ContactService.ActualizarContacto(vm.base.id,vm.base).then(function(res){
         $scope.$broadcast('reloadlist',true);
-            vm.cerrarModal();
+             vm.titleModal = "Detalles contacto";
+            vm.Editar = false;
+             vm.Detalles = true;
       }, function(res) {
         console.error("SURGIO UN ERROR: ", res);
       });   

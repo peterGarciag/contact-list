@@ -11,8 +11,8 @@ ion-list( can-swipe="contacts.deslizar")
          br
          | Celular: {{item.mobile}}
         ion-option-button.button-assertive.ion-trash-a( ng-click="contacts.delete(item.id)")
-        ion-option-button.button-positive.ion-edit(ng-click="contacts.editar({item: item})")
-        ion-option-button.button-positive.ion-ios-telephone(ng-click="contacts.llamar(item)")
+        ion-option-button.button-calm.ion-edit(ng-click="contacts.editar({item: item})")
+        ion-option-button.button-balanced.ion-ios-telephone(ng-click="contacts.llamar(item)")
 ion-infinite-scroll(ng-if="contacts.ExistenMasContactos" distance="10%" on-infinite="contacts.getMoreContacts()")
     ion-infinite-scroll-content
 
