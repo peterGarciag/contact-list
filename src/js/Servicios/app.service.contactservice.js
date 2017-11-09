@@ -92,11 +92,11 @@
     obj.ObtenerContactos = function(params) {
       var paramString = "?metadata=true&";
       if (typeof params != undefined) {
-        for ( const prop in params) {
+        for ( var prop in params) {
          paramString +=  `${prop}=${params[prop]}&`;
         }
       }
-      const regex = /[&]$/g;
+      var regex = /[&]$/g;
       paramString = paramString.replace(regex,'');
       
       return $http.get(API.API_URL + "contacts" + paramString).then(function(results, status, headers) {
