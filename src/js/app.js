@@ -2,7 +2,7 @@
 (function() {
     'use strict';
 
-angular.module('main', ['ionic','main.config','main.constants','main.services','main.directives','main.controllers'])
+angular.module('main', ['ionic','main.config','main.constants','main.services','main.directives','main.controllers','monospaced.elastic'])
 
 .run(run_main);
 
@@ -17,8 +17,13 @@ function run_main($ionicPlatform) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    if (!localStorage.getItem("pais")) {
+       localStorage.setItem("pais", 1);
+    }
+
   });
 }
-})();
+})(window.angular);
 
 

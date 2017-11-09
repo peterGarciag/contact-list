@@ -1,9 +1,63 @@
 ion-modal-view
     ion-header-bar(class="bar-positive")
+         button(ng-if="main.Detalles" class="button button-balanced" ng-click="main.Edit()")
+            | Editar
          h1(class="title")
             | {{main.titleModal}}
-         button(class="button button-assertive" ng-click="main.cerrarModal()")
-            | Cancelar
-    ion-content
-       {{main | json}}
-       form
+         button(class="button button-assertive" ng-click=" main.cerrarModal()")
+            | Cerrar
+    ion-content.no-padding
+         form(name="contacto"   )
+            ion-list
+                ion-item.item-divider
+                    | Datos basicos
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.nombre.$valid, 'invalid' :!contacto.nombre.$valid}") Nombre
+                    input( ng-disabled="main.Detalles" type='text', ng-model="main.base.name"  placeholder='Nombre', name="nombre" ,ng-required="true" , ng-maxlength="90")
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.identificacion.$valid , 'invalid' :  !contacto.identificacion.$valid }") Identificación
+                    input( ng-disabled="main.Detalles" type='text',  ng-model="main.base.identification" placeholder='Identificación' , name="identificacion"  , ng-required="true" , ng-maxlength="45")
+
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.email.$valid , 'invalid' :  !contacto.email.$valid }") Email
+                    input( ng-disabled="main.Detalles" type='email', name="email",ng-model="main.base.email " ,placeholder='Email', ng-pattern="main.emailRegex",ng-maxlength="100")
+                
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.observaciones.$valid , 'invalid' :  !contacto.observaciones.$valid }") Observaciones
+                    textarea( msd-elastic, ng-model="main.base.observations" , name="observaciones",ng-maxlength="500" ,placeholder='Observaciones')
+                  ion-item.item-divider
+                    | Dirección
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.direccion.$valid , 'invalid' :  !contacto.direccion.$valid }") Direccion
+                    input( ng-disabled="main.Detalles" type='text', ng-model="main.base.address.address" ,name="direccion", placeholder='Direccion')
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.direccion.$valid , 'invalid' :  !contacto.direccion.$valid }") Ciudad
+                    input( ng-disabled="main.Detalles" type='text', ng-model="main.base.address.city"  placeholder='Ciudad')
+                    
+                    
+                  ion-item.item-divider
+                    | telefonos
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.principal.$valid , 'invalid' :  !contacto.principal.$valid }") Principal
+                    input( ng-disabled="main.Detalles" type='tel', ng-model="main.base.phonePrimary " , placeholder='Principal', ng-maxlength="45" name="principal")
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.secundario.$valid , 'invalid' :  !contacto.secundario.$valid }") Secundario
+                    input( ng-disabled="main.Detalles" type='tel', ng-model="main.base.phoneSecondary " , placeholder='Secundario', ng-maxlength="45"  name="secundario",ng-pattern="main.telRegex")
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.fax.$valid , 'invalid' :  !contacto.fax.$valid }") fax
+                    input( ng-disabled="main.Detalles" type='tel', ng-model="main.base.fax " , placeholder='fax', ng-maxlength="45" name="fax")
+                  ion-item.item-input.item-floating-label
+                    span.input-label(ng-class="{ 'valid' : contacto.movil.$valid , 'invalid' :  !contacto.movil.$valid }") Movil
+                    input( ng-disabled="main.Detalles" type='tel', ng-model="main.base.mobile " , placeholder='Movil', ng-maxlength="45" name="movil")
+                  ion-item.item-divider
+                    | Tipo
+                  ion-item
+                    ion-checkbox.checkbox-calm(ng-change="main.tipo()" ng-model="main.base.typec")
+                        | Cliente
+                    ion-checkbox.checkbox-calm(ng-change="main.tipo()" ng-model="main.base.typep")
+                        | Proveedor
+                  
+            button(type="submit" ng-click="main.nuevoContacto(contacto)" class="button button-full button-positive ion-plus-circled"   ng-if="!main.Editar && !main.Detalles" ng-disabled="contacto.$invalid")
+                        |  Añadir  
+            button(type="submit" ng-click="main.editarContacto(contacto)" class="button button-full button-positive ion-plus-circled"   ng-if="main.Editar" ng-disabled="contacto.$invalid")
+                        |  Guardar

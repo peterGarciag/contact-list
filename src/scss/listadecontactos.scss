@@ -1,1 +1,56 @@
- 
+
+textarea ,
+input 
+{
+    border-bottom: solid 1px $input-color-placeholder;
+    &.ng-pristine {
+           border-bottom: solid 1px $input-color-placeholder;
+        }
+
+        &.ng-touched.ng-invalid {
+            &::placeholder{
+            color: $assertive ;
+          }
+            border-bottom: solid 1px $assertive ;
+        }
+
+        &.ng-touched.ng-valid {
+             &::placeholder
+        {
+            color: $balanced;
+        }
+        
+        border-bottom: solid 1px $balanced;
+        }
+} 
+
+
+textarea{
+    height: 32px !important;
+}
+@media (orientation: landscape) {
+  .item-input {
+    padding: 5px $item-padding;
+   }
+}
+
+
+
+.valid{
+    color:$balanced;
+}
+.invalid{
+    color:$assertive;
+}
+
+.button-fab{
+    border-radius: 50%;
+    position: fixed;
+    bottom: 45px;
+    right: 2px;
+}
+
+input[disabled], input[readonly]:not(.cloned-text-input), select[disabled], select[readonly], textarea[disabled], textarea[readonly]:not(.cloned-text-input){
+    background: tranparent !important ;
+
+}

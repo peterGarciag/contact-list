@@ -4,14 +4,15 @@ ion-list( can-swipe="contacts.deslizar")
     ion-item.list-inset(ng-if="(contacts.Contactos | filter : contacts.buscar(contacts.filtro)).length == 0")
         h2 
         | No hay contactos para mostrar
-    ion-item.list-inset(ng-repeat="item in contacts.Contactos | orderBy : contacts.ordenarpor | filter: contacts.buscar(contacts.filtro)" ng-click="contacts.seleccionar({item : item})")
-        h2 {{item.name}}
+    ion-item.list-inset(ng-repeat="item in contacts.Contactos | filter: contacts.buscar(contacts.filtro)" ng-click="contacts.seleccionar({item : item})")
+        h2 Nombre:{{item.name}}
         p 
-         | {{item.email}} 
+         | Email: {{item.email}} 
          br
-         | {{item.mobile}}
+         | Celular: {{item.mobile}}
         ion-option-button.button-assertive.ion-trash-a( ng-click="contacts.delete(item.id)")
         ion-option-button.button-positive.ion-edit(ng-click="contacts.editar({item: item})")
+        ion-option-button.button-positive.ion-ios-telephone(ng-click="contacts.llamar(item)")
 ion-infinite-scroll(ng-if="contacts.ExistenMasContactos" distance="10%" on-infinite="contacts.getMoreContacts()")
     ion-infinite-scroll-content
 

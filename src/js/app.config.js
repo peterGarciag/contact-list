@@ -10,6 +10,12 @@
     templateUrl: 'templates/main.html',
     controller: 'MainCtrl',
     controllerAs: 'main'
+  })
+   .state('options', {
+    url: '/',
+    templateUrl: 'templates/options.html',
+    controller: 'OptionsCtrl',
+    controllerAs: 'opts'
   });
   $urlRouterProvider.otherwise('/');
 }

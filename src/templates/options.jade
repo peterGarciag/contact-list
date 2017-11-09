@@ -1,0 +1,16 @@
+ion-view(view-title='Opciones')
+   ion-nav-bar(class="bar-positive")
+    ion-header-bar(class="bar-positive")
+      ion-nav-back-button(class="button-clear")
+        i(class="ion-arrow-left-c")
+        | Atras
+      h1(class="title")
+          | Opciones
+    ion-content
+        ion-list.list-inset
+          ion-item.item-divider
+            | Pais de ubicación:
+          ion-item(ng-init="opts.init()")
+            ion-radio( ng-repeat="p in opts.Paises | orderBy : 'nombre'" ng-change="opts.newPais()" ng-model="opts.pais" ng-value="'{{p.valor}}'")
+               | {{p.nombre}}
+    

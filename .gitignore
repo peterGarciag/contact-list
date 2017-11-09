@@ -30,8 +30,12 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 src/app.constant.js
+src/lib
+src/lib/**
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
 src/js/app.constant.js
 konsole
+scss/ionic.app.css
+

@@ -10,8 +10,9 @@ imagemin = require('gulp-imagemin'),
  
 
 
+
 paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['./**/**/*.scss'],
   js: [ './src/js/**/*'],
   html: ['./src/index.html'],
   images: ['./src/img/**/*'],
@@ -45,13 +46,11 @@ gulp.task('sass', function(done) {
 
 // genera los template en html 
 gulp.task('template', function() {
-  var YOUR_LOCALS = {};
+  
  
   gulp.src(paths.tmplates)
-    .pipe(jade({
-      locals: YOUR_LOCALS
-    }))
-    .pipe(gulp.dest('./www/'));
+    .pipe(jade())
+    .pipe(gulp.dest('./www/templates'));
 });
 
 

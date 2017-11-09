@@ -11,7 +11,6 @@
       scope: {
         editar: '&onEdit',
         seleccionar: '&seeDetails',
-        ordenarpor: '@',
         filtro: '@',
       },
       controller: _controller,
@@ -35,10 +34,11 @@
        }
     });
     _vm.getMoreContacts = function() {
-
+      
       var initialContact = 0;
       if (_vm.Contactos.length > 0) {
-        initialContact = _vm.Contactos[_vm.Contactos.length - 1].id;
+        initialContact = 
+        _vm.Contactos.length;
       }
 
       if (_vm.Contactos.length == _vm.Total) {
@@ -46,13 +46,14 @@
         return;
       }
       var params = {
-        start: 0,
-        limit: 10,
+        start: parseInt(initialContact),
+        limit: 5,
         order_direction: 'ASC',
         order_field: 'id',
       };
+      
       ContactService.ObtenerContactos(params).then(function(res) {
-        console.log(res);
+        
         _vm.Total = res.total;
         for (var i = 0; i < res.contactos.length; i++) {
           _vm.Contactos.push(res.contactos[i]);
@@ -64,7 +65,11 @@
 
     };  
 
-
+    _vm.llamar = function(item){
+      var URL = "tel:"+item.mobile;
+      console.log(URL);
+      window.open(URL);
+    };  
     _vm.buscar = function(criteria) {
 
       return function(item) {
@@ -73,11 +78,12 @@
         if (criteria == "") {
           b = true;
         } else {
-          b = (item.name.indexOf(criteria) > 0 ||
-            item.email.indexOf(criteria) > 0 ||
-            item.phonePrimary.indexOf(criteria) > 0 ||
-            item.phoneSecondary.indexOf(criteria) > 0 ||
-            item.fax.indexOf(criteria) > 0);
+          b = (item.name.indexOf(criteria) >= 0 ||
+            item.email.indexOf(criteria) >= 0 ||
+            item.phonePrimary.indexOf(criteria) >= 0 ||
+            item.phoneSecondary.indexOf(criteria) >= 0 ||
+            item.fax.indexOf(criteria) >= 0);
+          
         }
         return b;
       };
@@ -86,7 +92,7 @@
     _vm.doRefresh = function(ev) {
       var params = {
         start: 0,
-        limit: 10,
+        limit: 5,
         order_direction: 'ASC',
         order_field: 'id',
       };
@@ -94,6 +100,7 @@
         console.log(res);
         _vm.Total = res.total;
         _vm.Contactos = res.contactos;
+        _vm.ExistenMasContactos = true;
         $scope.$broadcast('scroll.refreshComplete');
       }, function(res) {
         console.error("SURGIO UN ERROR: ", res);

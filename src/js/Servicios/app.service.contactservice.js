@@ -13,9 +13,10 @@
 
     var obj = {};
 
-    obj.post = function(method, param) {
 
-      return $http.post(API.API_URL + method, (param ? param : new Object())).then(function(results, status, headers) {
+    obj.addContact = function( param) {
+
+      return $http.post(API.API_URL + "contacts", (param ? param : new Object())).then(function(results, status, headers) {
         return results;
       }, function(results, status, headers) {
 
@@ -40,6 +41,18 @@
 
     };
 
+    obj.ActualizarContacto = function(idContacto,param) {
+
+      return $http.put(API.API_URL + "contacts/" + idContacto,param).then(function(results, status, headers) {
+        var ret = {};
+         ret.contacto = results.data.data;
+        return ret;
+      }, function(results, status, headers) {
+        return results;
+      });
+
+    };
+
     obj.BorrarContacto = function(idContacto) {
       return $http.delete(API.API_URL + "contacts/" + idContacto).then(function(results, status, headers) {
         var ret = {};
@@ -52,6 +65,7 @@
       });
 
     };
+   
     /**
    * [ObtenerContactos obtiene la lista de contactos]
    * @param {[object]} params [parametros de consulta: obejto  con la estructura: { start: value,
@@ -82,6 +96,10 @@
       });
 
     };
+
+
+
+
     return obj;
   }
 
