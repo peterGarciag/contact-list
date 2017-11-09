@@ -22,7 +22,7 @@
   }
 
   function _controller($scope, ContactService, $timeout, $ionicActionSheet) {
-    let _vm = this;
+    var _vm = this;
     _vm.Contactos = [];
     _vm.deslizar = true;
     _vm.ExistenMasContactos = true;
@@ -143,7 +143,7 @@
      */
     _vm.delete = function(id) {
 
-      let _id = id;
+      var _id = id;
       var deleteSheet = $ionicActionSheet.show({
         destructiveText: 'Si',
         titleText: '¿Esta seguro de eliminar el contacto?',

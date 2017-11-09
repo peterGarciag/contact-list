@@ -93,7 +93,7 @@
       var paramString = "?metadata=true&";
       if (typeof params != undefined) {
         for ( var prop in params) {
-         paramString +=  `${prop}=${params[prop]}&`;
+         paramString +=  prop + "=" + params[prop] + "&";
         }
       }
       var regex = /[&]$/g;
